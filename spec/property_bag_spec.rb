@@ -24,36 +24,36 @@ end
 describe PropertyBag do
   describe '#prop' do
     it 'generates a reader method' do
-      TestReadWrite.instance_methods.member?('message')
+      expect(TestReadWrite.instance_methods.member?(:message)).to be(true)
     end
 
     it 'generates a writer method' do
-      TestReadWrite.instance_methods.member?('message=')
+      expect(TestReadWrite.instance_methods.member?(:message=)).to be(true)
     end
   end
 
   describe '#prop_reader' do
     it 'generates a reader method' do
-      TestRead.instance_methods.member?('message')
+      expect(TestRead.instance_methods.member?(:message)).to be(true)
     end
 
     it 'returns the value of an instance variable' do
       obj = TestRead.new('hello')
 
-      expect(obj.message).to be == obj.instance_variable_get('@message')
+      expect(obj.message).to eq(obj.instance_variable_get('@message'))
     end
   end
 
   describe '#prop_writer' do
     it 'generates a writer method' do
-      TestWrite.instance_methods.member?('message=')
+      expect(TestWrite.instance_methods.member?(:message=)).to be(true)
     end
 
     it 'writes a value to an instance variable' do
       obj = TestWrite.new
       obj.message = 'hello'
 
-      expect(obj.instance_variable_get('@message')).to be == 'hello'
+      expect(obj.instance_variable_get('@message')).to eq('hello')
     end
   end
 end
